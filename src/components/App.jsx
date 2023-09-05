@@ -1,33 +1,22 @@
-import { Profile } from "./profile/profile";
-import user from '../user.json'
-import { Statistics } from "./statistics/statistics";
-import statistics from '../statistics.json'
-import { Friends } from "./friends/friends";
-import friends from '../friends.json'
-import { TransactionHistory } from "./transactionHistory/transactionHistory";
-import transactionData from '../transactionData.json'
+import { useState } from "react";
+import { ContactForm } from "./ConctactForm";
+import { FindUser } from "./FindUser";
+import { ConctactList } from "./ConctactList";
+
 export const App = () => {
+  const [state, setState] = useState({
+    contacts: [],
+    filter: '',
+    name: '',
+    phone: ''
+  })
+
+
   return (
-    <div>
-      <Profile 
-        username={user.username} 
-        tag={user.tag} 
-        location={user.location}
-        avatar={user.avatar}
-        followers={user.stats.followers}
-        views={user.stats.views}
-        likes={user.stats.likes}
-      />
-
-      <Statistics 
-      title={'Upload statsф'}
-      Roma={statistics}
-      />
-
-      <Friends 
-      friends={friends}
-      />
-      <TransactionHistory data={transactionData}/>
+    <div style={{padding: 20}}>
+      <ContactForm state={state} setState={setState} />
+      <FindUser setState={setState} />
+      <ConctactList state={state} setState={setState} />
     </div>
   );
 };
